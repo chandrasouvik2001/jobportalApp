@@ -44,13 +44,13 @@ app.use(route)
 const adminroute =require("./route/admin")
 app.use("/admin",adminroute)
 
-const port = process.env.PORT || 5678
+const port = process.env.PORT || 5677
 const dbDriver ="mongodb+srv://souvik:iKG9viCnqF3hBPWh@cluster0.zraidlb.mongodb.net/Final_project"
 mongoose.connect(dbDriver,{useNewUrlParser:true,useUnifiedTopology:true})
 .then(result=>{
     app.listen(port,()=>{
         console.log("db connected")
-        console.log(`the server is running on ${port}`)
+        console.log(`the server is running on http://localhost:${port}`)
     })
 }).catch(err=>{
     console.log("db not conneted")

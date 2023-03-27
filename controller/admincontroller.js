@@ -2,6 +2,8 @@ const User = require("../model/UserModel")
 const jwt = require("jsonwebtoken")
 const bcrypt = require("bcryptjs")
 const config = require("../config/config")
+
+
 exports.login = (req, res) => {
     res.render("./admin/login", {
         title: "login page",
