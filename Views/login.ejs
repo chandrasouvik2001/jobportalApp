@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+  <%-include('common/header')%>
+  <body>
+    
+    <%-include('common/nav')%>
+
+<div class="container mt-5">
+    <div class="card border-primary mb-3" style="max-width: 30rem;">
+        <div class="card-header"><p><strong>Login</strong></p></div>
+        <div class="card-body text-info">
+           
+          <form action="/login_create" method="post">
+            <%if(message.length>0){%>
+              <div class="alert alert-success" role="alert">
+                <%=message%>
+              </div>
+              <%}%>
+              <%if(message1.length>0){%>
+                <div class="alert alert-success" role="alert">
+                  <%=message1%>
+                </div>
+                <%}%>
+                <%if(message2.length>0){%>
+                  <div class="alert alert-success" role="alert">
+                    <%=message2%>
+                  </div>
+                  <%}%>
+            
+            <div class="form-group">
+                <label for="exampleInputEmail1">Email address</label>
+                <input type="email" class="form-control" name="email" required>
+              </div>
+              <div class="form-group">
+                <label for="exampleInputPassword1">Password</label>
+                <input type="password" class="form-control" name="password" required >
+              </div>
+              <input type="checkbox" name="rememberme">Remember Me
+              <p></p>
+              <button type="submit" class="btn btn-primary">Login</button>
+              Don't have an account yet?<a href="/">Register</a>
+
+          </form>
+        </div>
+      </div>
+</div>
+
+
+    
+
+    <!-- Optional JavaScript; choose one of the two! -->
+
+    <!-- Option 1: jQuery and Bootstrap Bundle (includes Popper) -->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous"></script>
+
+    <!-- Option 2: Separate Popper and Bootstrap JS -->
+    <!--
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js" integrity="sha384-+sLIOodYLS7CIrQpBjl+C7nPvqq+FbNUBDunl/OZv93DB7Ln/533i8e/mZXLi/P+" crossorigin="anonymous"></script>
+    -->
+    <%-include('common/footer')%>
+  </body>
+</html>
