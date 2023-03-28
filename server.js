@@ -28,8 +28,8 @@ app.set("view engine","ejs")
 app.set("views","views")
 
 
-
-
+const dotenv=require("dotenv")
+dotenv.config()
 
 
 //user route
@@ -45,7 +45,8 @@ const adminroute =require("./route/admin")
 app.use("/admin",adminroute)
 
 const port = process.env.PORT || 5677
-const dbDriver ="mongodb+srv://souvik:iKG9viCnqF3hBPWh@cluster0.zraidlb.mongodb.net/Final_project"
+const dbDriver =`mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@cluster0.zraidlb.mongodb.net/Final_project`
+// const dbDriver = `mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@cluster0.i50grcb.mongodb.net/_project`
 mongoose.connect(dbDriver,{useNewUrlParser:true,useUnifiedTopology:true})
 .then(result=>{
     app.listen(port,()=>{
@@ -53,7 +54,7 @@ mongoose.connect(dbDriver,{useNewUrlParser:true,useUnifiedTopology:true})
         console.log(`the server is running on http://localhost:${port}`)
     })
 }).catch(err=>{
-    console.log("db not conneted")
+    console.log("db not connected")
     console.log(err)
 })
 

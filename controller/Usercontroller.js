@@ -8,30 +8,30 @@ exports.home = (req, res) => {
         title: "home page",
         data: req.user
     })
- }
+}
 
- exports.about = (req, res) => {
+exports.about = (req, res) => {
     res.render("about", {
         title: "about page"
     })
-  }
+}
 
-  exports.contact = (req, res) => {
+exports.contact = (req, res) => {
     res.render("contact", {
         title: "contact page"
     })
-   }
+}
 
-  exports.joblist = (req, res) => {
+exports.joblist = (req, res) => {
     res.render("job", {
         title: "job page"
     })
-   }
-   exports.jobdetails = (req, res) => {
+}
+exports.jobdetails = (req, res) => {
     res.render("jobdetails", {
         title: "jobdetails page"
     })
-   }
+}
 
 //    exports.post_job = (req, res) => {
 //     res.render("post_job", {
@@ -39,66 +39,78 @@ exports.home = (req, res) => {
 
 //     })
 // }
-exports.post_job =(req,res)=>{
+exports.post_job = (req, res) => {
     res.send("<h1> You Can not Access this page you are a user </h1>")
 }
 
- exports.register = (req, res) => {
+exports.register = (req, res) => {
     res.render("register", {
         title: "register page",
         data: req.user,
-        message1: req.flash("message1")
+        message: req.flash("message"),
+        error: req.flash("error")
     })
- }
+}
 
- exports.register_create=(req,res)=>{
+exports.register_create = (req, res) => {
     const user = new User({
-        name:req.body.name,
-        email:req.body.email,
-        password:bcrypt.hashSync(req.body.password,bcrypt.genSaltSync(10))
+        name: req.body.name,
+        email: req.body.email,
+        password: bcrypt.hashSync(req.body.password, bcrypt.genSaltSync(10))
     })
-    user.save().then(data=>{
-        req.flash("message","user register successfully")
+    user.save().then(data => {
+        req.flash("message", "User registered successfully")
         res.redirect("/login")
-    }).catch(err=>{
-        console.log("error please check",err)
+    }).catch(err => {
+        req.flash('error', "Error in saving data")
+        res.redirect('/register')
     })
- }
+}
 
- exports.login = (req, res) => {
+exports.login = (req, res) => {
+
+    loginData = {}
+    loginData.email = req.cookies.email ? req.cookies.email : undefined
+    loginData.password = req.cookies.password ? req.cookies.password : undefined
+
     res.render("login", {
         title: "loginpage",
         message: req.flash("message"),
-        message1: req.flash("message1"),
-        message2: req.flash("message2"),
-        data: req.user
+        error: req.flash("error"),
+        data: loginData
     })
-  }
+}
 
-  exports.login_create = (req, res) => {
+exports.login_create = (req, res) => {
     User.findOne({ email: req.body.email })
         .then(data => {
-               if(data && data.role==0){ 
+            if (data && data.role == 0) {
                 const hashpassword = data.password
                 if (bcrypt.compareSync(req.body.password, hashpassword)) {
-                    const tokendata = jwt.sign({ id: data._id,name:data.name }, config.security_key, { expiresIn: "30m" })
+                    const tokendata = jwt.sign({ id: data._id, name: data.name }, config.security_key, { expiresIn: "30m" })
                     res.cookie("usertoken", tokendata)
+
+                    if (req.body.rememberme) {
+                        res.cookie('email', req.body.email)
+                        res.cookie('password', req.body.password)
+                    }
                     res.redirect("/dashboard")
-                }else {
-                    req.flash("message1", "no user found on this email")
+                } else {
+                    req.flash("error", "Password Incorrect")
                     res.redirect("/login")
                 }
 
-               }else{
-                console.log("error whrn create login")
-               }
-            }).catch(err => {
+            } else {
+                req.flash("error", "No data found with this email id")
+                res.redirect("/login")
+            }
+        }).catch(err => {
             console.log("error", err)
         })
 
-   }
+}
 
-   exports.dashboard = (req, res) => {
+exports.dashboard = (req, res) => {
     if (req.user) {
         User.find()
             .then(userDetails => {
@@ -116,22 +128,12 @@ exports.post_job =(req,res)=>{
                 console.log(err);
             })
     }
-  }
+}
 
 
-  exports.userauth = (req, res, next) => {
-    if (req.user) {
-        console.log("user req",req.user)
-        next()
-    } else {
-        req.flash("message2", "cannot access this page")
-        res.redirect("/login")
-    }
-  }
-
-  exports.logout=(req,res)=>{
+exports.logout = (req, res) => {
     res.clearCookie("usertoken")
     res.redirect("/")
-  }
+}
 
 

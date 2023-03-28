@@ -8,8 +8,7 @@ exports.login = (req, res) => {
     res.render("./admin/login", {
         title: "login page",
         message: req.flash("message"),
-        message1: req.flash("message1"),
-        message2: req.flash("message2")
+        error: req.flash("error")
     })
 }
 
@@ -24,16 +23,17 @@ exports.logincreate = (req, res) => {
                         res.cookie("admintoken", tokendata)
                         res.redirect("/admin/dashboard")
                     } else {
-                        req.flash("message", "login first")
+                        req.flash("error", "Password Incorrect")
                         res.redirect("/admin/")
 
                     }
                 } else {
-                    req.flash("message1", "email not found")
+                    req.flash("error", "No Admin found")
+                    res.redirect('/admin')
                 }
             } else {
-                req.flash
-                console.log("data not found")
+                req.flash("error", "No Admin found")
+                res.redirect('/admin/')
             }
         }).catch(err => {
             console.log(err)
@@ -58,17 +58,6 @@ exports.dashboard = (req, res) => {
     }
 }
 
-
-
-exports.adminauth = (req, res, next) => {
-    if (req.admin) {
-        console.log("admin req", req.admin)
-        next()
-    } else {
-        req.flash("message2", "can not access this page login first")
-        res.redirect("/admin/")
-    }
-}
 
 exports.user=(req,res)=>{
     res.render("./admin/user",{
