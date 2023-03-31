@@ -7,13 +7,17 @@ const flash=require("connect-flash")
 const cookieParser =require("cookie-parser")
 const userauth=require("./middleware/userauth")
 const adminauth =require("./middleware/adminauth")
+const employerauth =require("./middleware/employerauth")
 const app = express()
 app.use(express.static(path.join(__dirname,"public")))
 app.use(express.urlencoded({extended:true}))
 app.use(flash());
 app.use(cookieParser());
+
 app.use(userauth.userauth)
 app.use(adminauth.adminauth)
+app.use(employerauth.employerauth)
+
 
 app.use(session({
     cookie: {
@@ -36,13 +40,17 @@ dotenv.config()
 const route = require("./route/user")
 app.use(route)
 
-// Employee route
-// const route =require("./route/employeer")
-// app.use(route)
+// Employer route
+ const employerroute =require("./route/employer")
+ app.use("/emp",employerroute)
 
 //admin route
+
 const adminroute =require("./route/admin")
 app.use("/admin",adminroute)
+
+const jobsave =require("./route/jobsave")
+app.use("/jobpost",jobsave)
 
 const port = process.env.PORT || 5677
 const dbDriver =`mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@cluster0.zraidlb.mongodb.net/Final_project`

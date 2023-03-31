@@ -17,3 +17,13 @@ exports.adminauth = (req, res, next) => {
         res.redirect("/admin/")
     }
 }
+
+exports.employerauth = (req, res, next) => {
+    if (req.employer) {
+        console.log("admin req", req.employer)
+        next()
+    } else {
+        req.flash("error", "Can not access this page login first")
+        res.redirect("/emp/")
+    }
+}

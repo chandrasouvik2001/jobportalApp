@@ -18,5 +18,6 @@ route.get("/login", controller.login)
 route.post("/login_create", controller.login_create)
 route.get("/dashboard", utils.userauth, controller.dashboard)
 route.get("/logout", controller.logout)
+route.get("/confirmation/:email/:token",controller.confirmation);
 
 module.exports = route
