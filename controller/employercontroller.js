@@ -70,8 +70,8 @@ exports.post_job = (req, res) => {
                         secure: false,
                         requireTLS: true,
                         auth: {
-                            user: "tiwarysubho3@gmail.com",
-                            pass: "oesfmxdjuqstiexp"
+                            user: "",
+                            pass: ""
                         }
                     })
     
