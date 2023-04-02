@@ -5,12 +5,17 @@ const config = require("../config/config")
 const nodemailer = require("nodemailer");
 const tokenModel = require('../model/TokenModel')
 const crypto = require('crypto')
+const Category = require("../model/categoryModel")
 
 exports.home = (req, res) => {
-    res.render("home", {
-        title: "home page",
-        data: req.user
-    })
+    Category.find()
+            .then(categoryDetails=>{
+                res.render("home", {
+                    title: "home page",
+                    data: req.user,
+                    categoryData: categoryDetails
+                }) 
+            })
 }
 
 exports.about = (req, res) => {

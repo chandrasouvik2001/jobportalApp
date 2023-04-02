@@ -506,7 +506,8 @@ button:focus {
 }
 
 .header_container {
-    width: 100%
+    width: 100%;
+   
 }
 
 .header_content {
@@ -624,7 +625,7 @@ button:focus {
 
 .header_container .Post-Jobs:hover a {
     cursor: pointer;
-    color: #f26522;
+    color: #14bdee;
     text-decoration: none;
     transition: .3s
 }
@@ -1232,7 +1233,7 @@ button.close {
 #search-box .search-box_search_button {
     width: 186px;
     height: 57px;
-    background: #f26522;
+    background: #0a8196;
     border: none;
     outline: none;
     border-radius: 5px;
@@ -4757,3 +4758,23 @@ html .ui-button.ui-state-disabled:active {
         height: 100%;
     }
 }
+
+.flex-parent {
+    display: flex;
+}
+
+.jc-center {
+    justify-content: center;
+}
+
+.modal-open {
+    position: fixed;
+    overflow: scroll;
+    width:100%;
+    padding-right: 0 !important;
+}
+
+
+
+
+

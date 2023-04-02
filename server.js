@@ -8,6 +8,7 @@ const cookieParser =require("cookie-parser")
 const userauth=require("./middleware/userauth")
 const adminauth =require("./middleware/adminauth")
 const employerauth =require("./middleware/employerauth")
+const multer=require("multer")
 const app = express()
 app.use(express.static(path.join(__dirname,"public")))
 app.use(express.urlencoded({extended:true}))
@@ -31,9 +32,11 @@ app.use(session({
 app.set("view engine","ejs")
 app.set("views","views")
 
-
 const dotenv=require("dotenv")
 dotenv.config()
+
+// for image upload
+app.use('/admin/public/upload',express.static(path.join(__dirname,'public/upload')));
 
 
 //user route
