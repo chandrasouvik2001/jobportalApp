@@ -74,8 +74,13 @@ exports.register_create = (req, res) => {
                         secure: false,
                         requireTLS: true,
                         auth: {
+<<<<<<< HEAD
                             user: "sahananaser94@gmail.com",
                             pass: "gtavpzuvfvfnkzzc"
+=======
+                            user: "",
+                            pass: ""
+>>>>>>> 82eeef7136c10615c0273427cba7fcdda9b16b40
                         }
                     })
 
