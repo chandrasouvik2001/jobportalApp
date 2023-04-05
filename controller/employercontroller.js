@@ -80,7 +80,7 @@ exports.post_job = (req, res) => {
                         from: 'no-reply@raju.com',
                         to: emp.email,
                         subject: 'Account Verification',
-                        text: 'Hello ' + req.body.name + ',\n\n' + 'Please verify your account by clicking the link: \nhttp:\/\/' + req.headers.host + '\/confirmation\/' + emp.email + '\/' + etoken.etoken + '\n\nThank You!\n'
+                        text: 'Hello ' + req.body.name + ',\n\n' + 'Please verify your account by clicking the link: \nhttp:\/\/' + req.headers.host + '\/emp/econfirmation\/' + emp.email + '\/' + etoken.etoken + '\n\nThank You!\n'
                     }
     
                     transporter.sendMail(mailOptions, function (err) {
@@ -97,7 +97,7 @@ exports.post_job = (req, res) => {
                 })
     })
     .catch(err =>{
-     console.log("error while finding user",err);
+     console.log("error while finding employer",err);
     })  
 }
 
@@ -111,16 +111,17 @@ exports.post_job = (req, res) => {
 
 
 exports.econfirmation = (req, res) => {
-    etokenModel.findOne({ token: req.params.etoken }, (err, etoken) => {
+    etokenModel.findOne({ etoken: req.params.etoken }, (err, etoken) => {
+        console.log(etoken)
         if (!etoken) {
             console.log("Verification Link May Be Expired :(");
         } else {
             employer.findOne({ _id: etoken._empId, email: req.params.email }, (err, emp) => {
                 if (!emp) {
-                    req.flash("message", "User Not Found");
+                    req.flash("message", "Employer Not Found");
                     res.redirect("/");
                 } else if (emp.isVerified) {
-                    req.flash("message", "User Already Verified");
+                    req.flash("message", "Employer Already Verified");
                     res.redirect("/");
                 } else {
                     emp.isVerified = true;

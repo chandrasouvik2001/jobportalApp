@@ -45,5 +45,10 @@ route.get("/category", admincontroller.category)
 route.post("/category_create", upload.single('image'), admincontroller.category_create)
 route.get("/deactive_category/:id", admincontroller.deactive_category)
 route.get("/active_category/:id", admincontroller.active_category)
+route.get("/deactive_user/:id", admincontroller.deactive_user)
+route.get("/active_user/:id", admincontroller.active_user)
+route.get("/jobpost", admincontroller.jobpost)
+route.get("/contact", admincontroller.contact)
+
 
 module.exports = route

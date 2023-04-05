@@ -56,8 +56,9 @@ const jobsave =require("./route/jobsave")
 app.use("/jobpost",jobsave)
 
 const port = process.env.PORT || 5677
-const dbDriver =`mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@cluster0.zraidlb.mongodb.net/Final_project`
-// const dbDriver = `mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@cluster0.i50grcb.mongodb.net/_project`
+//const dbDriver =`mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@cluster0.zraidlb.mongodb.net/Final_project`
+/* const dbDriver = `//${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@cluster0.i50grcb.mongodb.net/_project`*/
+const dbDriver = `mongodb+srv://suvo:JZqogN4pKvy08wYW@cluster0.pedaesj.mongodb.net/job_portal`
 mongoose.connect(dbDriver,{useNewUrlParser:true,useUnifiedTopology:true})
 .then(result=>{
     app.listen(port,()=>{

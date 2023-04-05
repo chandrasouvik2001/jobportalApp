@@ -9,41 +9,36 @@
       <%-include('common/sidebar')%>
         <!-- Page Content  -->
       <div id="content" class="p-4 p-md-5 pt-5">
-        <h2 class="mb-4">User Page</h2>
+        <h2 class="mb-4">Contact Page</h2>
 
         
 
         <table class="table">
           <thead>
             <tr>
-              <th scope="col">Slno</th>
-              <th scope="col">UserId</th>
+              <th scope="col">Sl no</th>
               <th scope="col">Name</th>
+              <th scope="col">Subject</th>
               <th scope="col">Email</th>
-              <th scope="col">Action</th>
+              <th scope="col">Phone</th>
+              <th scope="col">Message</th>
             </tr>
           </thead>
           <tbody>
-            <% let index = 1 %>
-            
-            <% if(displayData.length > 0) {
-              for(data of displayData) {
-              
-              %>
             <tr>
-              <td><%=index++%></td>
-              <td><%-data._id %></td>
-              <td><%-data.name%></td>
-              <td><%-data.email%></td>
+                <% let index = 1 %>
             
-                <td><a href="/admin/deactive_user/<%=data._id%>" class="btn btn-danger">Deactive</a></td>
-            
-                
-           
-
+            <% if(contactData.length > 0) {for(data of contactData) {%>
+                <td><%=index++%></td>
+                <td><%=data.name %></td>
+                <td><%=data.subject%></td>
+                <td><%=data.email%></td>
+                <td><%=data.phone%></td>
+                <td><%=data.message%></td>
+              
+                  
             </tr>
             <% } } %>
-           
           </tbody>
         </table>
       

@@ -10,7 +10,7 @@ const categorySchema = new Schema({
         require: true
     },
     status: {
-        type: Boolean,
+        type: Number,
         default: true
     }
 })

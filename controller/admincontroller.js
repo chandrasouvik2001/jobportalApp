@@ -3,6 +3,9 @@ const jwt = require("jsonwebtoken")
 const bcrypt = require("bcryptjs")
 const config = require("../config/config")
 const Category = require("../model/categoryModel")
+const jobpost = require("../model/JobModel")
+const employer = require('../model/EmployerModel')
+const contact= require('../model/contactmodel')
 
 exports.login = (req, res) => {
     res.render("./admin/login", {
@@ -59,17 +62,17 @@ exports.dashboard = (req, res) => {
 }
 
 
-exports.user=(req,res)=>{
+/*exports.user=(req,res)=>{
     res.render("./admin/user",{
         title:"user page"
     })
-}
+}*/
 
-exports.employeer =(req,res)=>{
+/*exports.employeer =(req,res)=>{
     res.render("./admin/employeer",{
         title:"employeer page"
     })
-}
+}*/
 
 exports.category = (req, res) =>{
     Category.find()
@@ -118,7 +121,7 @@ exports.category_create = (req, res) =>{
 }
 
 exports.deactive_category = (req, res) =>{
-    Category.findByIdAndUpdate(req.params.id, {status: false})
+    Category.findByIdAndUpdate(req.params.id, {status: 0})
             .then(data=>{
                 req.flash("message", "Category deactivated")
                 res.redirect("/admin/category")
@@ -129,7 +132,7 @@ exports.deactive_category = (req, res) =>{
 }
 
 exports.active_category = (req, res) =>{
-    Category.findByIdAndUpdate(req.params.id, {status: true})
+    Category.findByIdAndUpdate(req.params.id, {status: 1})
             .then(data=>{
                 req.flash("message", "Category activated")
                 res.redirect("/admin/category")
@@ -150,6 +153,86 @@ exports.active_category = (req, res) =>{
 //             })
     
 // }
+
+exports.user = (req, res) => {
+    User.find({role:0}).then(result => {
+        res.render("./admin/user", {
+            title: "Admin | Users",
+            data: req.admin,
+            displayData: result
+        })
+    }).catch(err => {
+        console.log(err);
+    })
+}
+
+exports.employeer = (req,res)=>{
+    employer.find()
+   .then(result => {
+        res.render("./admin/employeer", {
+            title: "Admin | employer",
+            data: req.admin,
+            displayData: result
+        })
+    }).catch(err => {
+        console.log(err);
+    })
+}
+
+exports.jobpost = (req, res) =>{
+    jobpost.find().then(result => {
+        res.render("./admin/jobpost", {
+            title: "Admin | Jobpost",
+            data: req.admin,
+            displayData: result
+        })
+    }).catch(err => {
+        console.log(err);
+    })
+}
+
+exports.contact = (req, res) =>{
+    contact.find()
+    .then(result => {
+        console.log(result)
+        res.render("./admin/contact", {
+            title: "Admin | Contact",
+            data: req.admin,
+            contactData: result
+        })
+    }).catch(err => {
+        console.log(err);
+    })
+}
+
+
+exports.deactive_user = (req, res) =>{
+    User.findByIdAndUpdate(req.params.id, {status: 0})
+            .then(data=>{
+                req.flash("message", "User deactivated")
+                res.redirect("/admin/")
+            }).catch(err=>{
+                req.flash("error", "User is not deactivated")
+                res.redirect("/admin/user")
+            })
+}
+
+exports.active_user = (req, res) =>{
+    User.findByIdAndUpdate(req.params.id, {status: 1})
+            .then(data=>{
+                req.flash("message", "User activated")
+                res.redirect("/admin/category")
+            }).catch(err=>{
+                req.flash("error", "User is not activated")
+                res.redirect("/admin/category")
+            })
+}
+
+/*exports.contact = (req,res)=>{
+    contacts.find()
+    res.render('./admin/contact')
+}*/
+
 
 exports.logout = (req, res) => {
     res.clearCookie("admintoken")

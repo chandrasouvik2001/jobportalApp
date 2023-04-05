@@ -5,9 +5,11 @@ const controller = require("../controller/Usercontroller")
 const middleware =require("../middleware/verifyemail")
 const utils = require("../utils/utils")
 
+
 route.get("/",controller.home)
 route.get("/about",controller.about)
 route.get("/contact",controller.contact)
+route.post("/contact_create",controller.contact_create)
 route.get("/joblist",controller.joblist)
 route.get("/jobdetails",controller.jobdetails)
 route.get("/post_job",controller.post_job)
@@ -19,5 +21,8 @@ route.post("/login_create", controller.login_create)
 route.get("/dashboard", utils.userauth, controller.dashboard)
 route.get("/logout", controller.logout)
 route.get("/confirmation/:email/:token",controller.confirmation);
+
+
+
 
 module.exports = route

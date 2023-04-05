@@ -63,7 +63,7 @@
                 </p>
                 <div class="vertical-space-60"> </div>
                 <div class="row">
-                    <!-- <% console.log(categoryData)%>
+                    <!-----<% console.log(categoryData)%>
                     <%if(categoryData.length>0) {%>
                         <% for(let result of categoryData) { if(result.status!=false){%>
                             <div class="col-lg-3 col-md-6 max-width-50">
@@ -78,11 +78,11 @@
                                 </div>
                             </div>
                     <%}}}%> -->
-                   
-                   
-                   
-                   
-                   
+
+
+
+
+
                 </div>
                 <div class="vertical-space-40"></div>
                 <a href="#" class="Brows-All-Category">Brows All Category</a>
@@ -99,25 +99,37 @@
                 <p class="max-width">Lorem ipsum tempus amet conubia adipiscing fermentum viverra gravida, mollis
                     suspendisse pretium dictumst inceptos mattis euismod
                 </p>
+
                 <div class="vertical-space-60"></div>
-                <div class="detail">
-                    <div class="media display-inline text-align-center">
-                        <img src="imags/job-post-icone-1.png" alt="John Doe" class="mr-3 ">
-                        <div class="media-body text-left  text-align-center">
-                            <h6>Jopitar looking for a senior UX Designer</h6>
-                            <i class="large material-icons">account_balance</i>
-                            <span class="text">Jopitar inc.</span>
-                            <br />
-                            <i class="large material-icons">place</i>
-                            <span class="text font-size">11907 Doyle Cape Cydneyview</span>
-                            <div class="float-right margin-top text-align-center">
-                                <a href="#" class="part-full-time">Part Time</a>
-                                <p class="date-time">Deadline: May 23, 2018</p>
+                <div class="detail ">
+                   
+                    <%if(categoryData.length>0) {%>
+                        <% for(let result of categoryData) { if(result.status!=0){%> {%>
+                            <div class="media display-inline text-align-center">
+                                <img src="<%=result.image%>" alt="John Doe" class="mr-4">
+                                <div class="media-body text-left  text-align-center">
+                                    <h6><%=result.name%> looking for a senior UX Designer</h6>
+                                    <i class="large material-icons">account_balance</i>
+                                    <span class="text">
+                                        <%=result.name%>
+                                    </span>
+                                    <br />
+                                    <i class="large material-icons">place</i>
+                                    <span class="text font-size">
+                                        <%=result.name%>
+                                    </span>
+                                    <div class="float-right margin-top text-align-center mb-5">
+                                        <a href="#" class="part-full-time">Part Time</a>
+                                        <p class="date-time">Deadline: May 23, 2018</p>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                    </div>
+                            <%}%>
+                        <%}%>
+                    <%}%>
                 </div>
-                <div class="detail">
+
+            <!-------  <div class="detail">
                     <div class="media display-inline text-align-center">
                         <img src="imags/job-post-icone-2.png" alt="John Doe" class="mr-3 ">
                         <div class="media-body text-left text-align-center">
@@ -133,8 +145,8 @@
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="detail">
+                </div>------->
+                <!-----         <div class="detail">
                     <div class="media display-inline text-align-center">
                         <img src="imags/job-post-icone-3.png" alt="John Doe" class="mr-3 ">
                         <div class="media-body text-left text-align-center">
@@ -184,7 +196,7 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div>--------->
                 <div class="vertical-space-20"></div>
                 <div class="job-list">
                     <a href="#" class="Open-Jobs-Page margin-auto">Open Jobs Page<i

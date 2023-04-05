@@ -51,7 +51,7 @@ route.get('/log',employerController.login)
 route.post('/log/create',employerController.login_create)
 route.get("/post_job",utils.employerauth,employerController.post_job)
 route.get('/logout',employerController.logout)
-route.get("/confirmation/:email/:etoken",employerController.econfirmation);
+route.get("/econfirmation/:email/:etoken",employerController.econfirmation);
 //route.post('/jobpost',upload.single('image'),employerController.register)
 
 

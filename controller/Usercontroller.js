@@ -6,6 +6,7 @@ const nodemailer = require("nodemailer");
 const tokenModel = require('../model/TokenModel')
 const crypto = require('crypto')
 const Category = require("../model/categoryModel")
+const contact = require("../model/contactmodel")
 
 exports.home = (req, res) => {
     Category.find()
@@ -26,9 +27,34 @@ exports.about = (req, res) => {
 
 exports.contact = (req, res) => {
     res.render("contact", {
-        title: "contact page"
+        title: "contact page",
+        message: req.flash("message"),
+        error: req.flash("error")
     })
 }
+
+exports.contact_create = (req,res)=>{
+    const contacts = new contact({
+        name:req.body.name,
+        subject:req.body.subject,
+        email:req.body.email,
+        phone:req.body.phone,
+        message:req.body.message
+    })
+    contacts.save()
+    .then(result =>{
+        req.flash("message", "Contacts saved successfully")
+        console.log(`data added successfully`)
+        res.redirect("/contact")
+    })
+  
+        .catch(err => {
+            req.flash('error', "Error in saving data")
+            res.redirect('/contact')
+    })
+}
+
+
 
 exports.joblist = (req, res) => {
     res.render("job", {
@@ -87,8 +113,8 @@ exports.register_create = (req, res) => {
                     secure: false,
                     requireTLS: true,
                     auth: {
-                        user: "",
-                        pass: ""
+                        user: "tiwarysubho3@gmail.com ",
+                        pass: "oesfmxdjuqstiexp"
                     }
                 })
 
