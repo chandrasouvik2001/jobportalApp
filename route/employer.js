@@ -4,7 +4,7 @@ const employerController = require('../controller/employercontroller')
 const multer = require('multer')
 const path = require('path')
 const utils = require("../utils/utils")
-//const verify = require('../middleware/verifyemail')
+// const verify = require('../middleware/verifyemail')
 
 
 
@@ -46,12 +46,12 @@ const upload = multer({
 
 
 route.get('/',employerController.register)
-route.post('/reg/create',upload.single('image'),employerController.register_create)
+route.post('/reg/create',  upload.single('image'), employerController.register_create)
 route.get('/log',employerController.login)
 route.post('/log/create',employerController.login_create)
 route.get("/post_job",utils.employerauth,employerController.post_job)
 route.get('/logout',employerController.logout)
-route.get("/confirmation/:email/:etoken",employerController.econfirmation);
+route.get("/econfirmation/:email/:etoken",employerController.econfirmation);
 //route.post('/jobpost',upload.single('image'),employerController.register)
 
 

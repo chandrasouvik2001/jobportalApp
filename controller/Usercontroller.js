@@ -8,8 +8,9 @@ const crypto = require('crypto')
 const Category = require("../model/categoryModel")
 
 exports.home = (req, res) => {
-    Category.find()
-            .then(categoryDetails=>{
+    Category.find({
+        status: true
+    }).then(categoryDetails=>{
                 res.render("home", {
                     title: "home page",
                     data: req.user,
@@ -31,10 +32,16 @@ exports.contact = (req, res) => {
 }
 
 exports.joblist = (req, res) => {
-    res.render("job", {
-        title: "job page"
+    Category.find({
+        status: true
+    }).then(categoryDetails=>{
+        res.render("job", {
+            title: "job page",
+            categoryData: categoryDetails
+        })
     })
 }
+
 exports.jobdetails = (req, res) => {
     res.render("jobdetails", {
         title: "jobdetails page"
@@ -87,8 +94,8 @@ exports.register_create = (req, res) => {
                     secure: false,
                     requireTLS: true,
                     auth: {
-                        user: "",
-                        pass: ""
+                        user: "sahananaser94@gmail.com",
+                        pass: "gtavpzuvfvfnkzzc"
                     }
                 })
 

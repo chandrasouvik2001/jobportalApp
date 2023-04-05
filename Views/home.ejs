@@ -43,8 +43,16 @@
 
                         <div class="d-flex flex-row align-items-center justify-content-start inline-block">
                             <span class="large material-icons search">category</span>
-                            <input class="search-box_search_input" placeholder="Category" required="required"
-                                type="search">
+                            <select class="dropdown_item_select search-box_search_input">
+                                <option >Category</option>
+                                <% for(let result of categoryData) {%>
+                                    <option value="<%=result._id%>"><%=result.name%></option>
+                                <%}%>
+                            </select>
+                           
+                            
+                            <!-- <input class="search-box_search_input" placeholder="Category" required="required"
+                                type="search"> -->
 
 
                         </div>
@@ -52,7 +60,6 @@
                 </form>
             </div>
         </div>
-
 
         <section id="Job-Category">
             <div class="container">
@@ -63,31 +70,23 @@
                 </p>
                 <div class="vertical-space-60"> </div>
                 <div class="row">
-                    <!-- <% console.log(categoryData)%>
                     <%if(categoryData.length>0) {%>
-                        <% for(let result of categoryData) { if(result.status!=false){%>
-                            <div class="col-lg-3 col-md-6 max-width-50">
-                                <div class="box background-color-white-light">
-                                    <div class="circle">
-                                        <img src="imags/icone/service-icone-1.png" alt="">
-                                    <div>
-                                    <h6><%=result.name%></h6>
-                                    <a href="#" class="button job_post" data-hover="View Jobs" data-active="I'M ACTIVE">
-                                        <span>36 Job Posts</span>
-                                    </a>
+                        <% for(let result of categoryData) { %>
+                        <div class="col-lg-3 col-md-6 max-width-50">
+                            <div class="box background-color-white-light">
+                                <div class="circle">
+                                    <img src="/<%=result.image%>" alt="">
                                 </div>
+                                <h6><%=result.name%></h6>
+                                <a href="#" class="button job_post" data-hover="View Jobs" data-active="I'M ACTIVE"><span>36 Job
+                                    Posts</span></a>
                             </div>
-                    <%}}}%> -->
-                   
-                   
-                   
-                   
-                   
+                        </div>
+                    <%}}%>
                 </div>
-                <div class="vertical-space-40"></div>
-                <a href="#" class="Brows-All-Category">Brows All Category</a>
+                
             </div>
-            <div class="vertical-space-85"></div>
+          
         </section>
 
 
