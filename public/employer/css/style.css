@@ -4757,3 +4757,18 @@ html .ui-button.ui-state-disabled:active {
         height: 100%;
     }
 }
+
+.flex-parent {
+    display: flex;
+}
+
+.jc-center {
+    justify-content: center;
+}
+
+.modal-open {
+    position: fixed;
+    overflow: scroll;
+    width:100%;
+    padding-right: 0 !important;
+}

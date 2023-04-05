@@ -8337,3 +8337,28 @@ a[data-toggle="collapse"] {
     text-align: center;
   }
 
+  .search-box_search_input {
+    width: 70%;
+    border: none;
+    outline: none;
+    height: 25px;
+    padding-left: 25px;
+    color: #857c7c;
+    font-size: 20px;
+    font-family: proxima nova;
+    font-weight: 400
+}
+
+.dropdown_item_select {
+  position: relative;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  -ms-appearance: none;
+  -o-appearance: none;
+  appearance: none;
+  box-shadow: 0 0 0 transparent;
+  -webkit-user-select: none;
+  background-image: url(../imags/down.png);
+  background-position: center right;
+  background-repeat: no-repeat
+}

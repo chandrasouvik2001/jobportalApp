@@ -5,17 +5,30 @@ const config = require('../config/config')
 const nodemailer = require("nodemailer");
 const etokenModel = require('../model/eTokenModel')
 const crypto = require('crypto')
-const jobmodel= require('../model/JobModel')
+const jobmodel = require('../model/JobModel')
+const Category = require("../model/categoryModel")
 
 
 
-
-exports.register = (req,res)=>{
+exports.register = (req, res) => {
     res.render('./Employer/empregister',)
 }
 
+exports.post_job = (req, res) => {
+    Category.find({
+        status: true
+    }).then(categoryDetails => {
+        res.render("./Employer/post_job", {
+            title: "job_post_page",
+            categoryData: categoryDetails
+        })
 
-exports.login = (req,res)=>{
+    })
+
+}
+
+
+exports.login = (req, res) => {
     loginData = {}
     loginData.email = req.cookies.email ? req.cookies.email : undefined
     loginData.password = req.cookies.password ? req.cookies.password : undefined
@@ -30,59 +43,55 @@ exports.login = (req,res)=>{
 
 
 
-exports.post_job = (req, res) => {
-        res.render("./Employer/post_job", {
-            title: "job_post_page",
-    
-         })
-     }
-
-
-
-    exports.register_create = (req, res) => {
-        const Employer = new employer({
-            name: req.body.name,
-            email: req.body.email,
-            phone: req.body.phone,
-            password: bcrypt.hashSync(req.body.password, bcrypt.genSaltSync(10)),
-            cpassword: req.body.cpassword,
-            company: req.body.company,
-            image: req.file.filename,
-         })
-        Employer.save()
+exports.register_create = (req, res) => {
+    const Employer = new employer({
+        name: req.body.name,
+        email: req.body.email,
+        phone: req.body.phone,
+        password: bcrypt.hashSync(req.body.password, bcrypt.genSaltSync(10)),
+        cpassword: req.body.cpassword,
+        company: req.body.company,
+        image: req.file.filename,
+    })
+    Employer.save()
         .then(emp => {
 
             const etoken_model = new etokenModel({
                 _empId: emp._id,
                 etoken: crypto.randomBytes(16).toString('hex')
             })
-    
-    
-    
+
+
+
             etoken_model.save()
-    
-    
+
+
                 .then(etoken => {
-    
+
                     var transporter = nodemailer.createTransport({
                         host: "smtp.gmail.com",
                         port: 587,
                         secure: false,
                         requireTLS: true,
                         auth: {
-                            user: "tiwarysubho3@gmail.com",
-                            pass: "oesfmxdjuqstiexp"
+<<<<<<< HEAD
+                            user: "sahananaser94@gmail.com",
+                            pass: "gtavpzuvfvfnkzzc"
+=======
+                            user: "",
+                            pass: ""
+>>>>>>> 82eeef7136c10615c0273427cba7fcdda9b16b40
                         }
                     })
-    
-    
+
+
                     var mailOptions = {
                         from: 'no-reply@raju.com',
                         to: emp.email,
                         subject: 'Account Verification',
                         text: 'Hello ' + req.body.name + ',\n\n' + 'Please verify your account by clicking the link: \nhttp:\/\/' + req.headers.host + '\/emp/econfirmation\/' + emp.email + '\/' + etoken.etoken + '\n\nThank You!\n'
                     }
-    
+
                     transporter.sendMail(mailOptions, function (err) {
                         if (err) {
                             console.log("Techniclal Issue...");
@@ -95,19 +104,20 @@ exports.post_job = (req, res) => {
                 .catch(err => {
                     console.log("error while finding token", err)
                 })
+<<<<<<< HEAD
     })
     .catch(err =>{
      console.log("error while finding employer",err);
     })  
+=======
+        })
+        .catch(err => {
+            console.log("error while finding employer", err);
+        })
+>>>>>>> dbc56882de0c9efe019a8a50964a3e9b5b850dd2
 }
 
-/*.then(data => {
-    req.flash("message", "User registered successfully")
-    res.redirect("/emp/log")
-}).catch(err => {
-    req.flash('error', "Error in saving data")
-    res.redirect('/emp/')
-})*/
+
 
 
 exports.econfirmation = (req, res) => {
@@ -137,50 +147,50 @@ exports.econfirmation = (req, res) => {
     })
 }
 
-exports.login_create= (req,res)=>{
+exports.login_create = (req, res) => {
     employer.findOne({
-        email:req.body.email
+        email: req.body.email
     })
-    .then(edata=>{
-        if(edata){
-            console.log(edata)
-            const hashpassword = edata.password
-            if(bcrypt.compareSync(req.body.password,hashpassword)){
-                const tokendata = jwt.sign({id:edata._id},config.security_key,{expiresIn:"5h" })
-                res.cookie("empToken",tokendata)
+        .then(edata => {
+            if (edata) {
+                console.log(edata)
+                const hashpassword = edata.password
+                if (bcrypt.compareSync(req.body.password, hashpassword)) {
+                    const tokendata = jwt.sign({ id: edata._id }, config.security_key, { expiresIn: "5h" })
+                    res.cookie("empToken", tokendata)
 
-                if (req.body.rememberme) {
-                    res.cookie('email', req.body.email)
-                    res.cookie('password', req.body.password)
+                    if (req.body.rememberme) {
+                        res.cookie('email', req.body.email)
+                        res.cookie('password', req.body.password)
+                    }
+
+                    res.redirect('/emp/post_job')
+
+                }
+                else {
+                    console.log('password not match')
+                    res.redirect('/emp/log')
                 }
 
-                res.redirect('/emp/post_job')
-                
+
+
             }
-            else{
-                console.log('password not match')
+            else {
+                console.log(' data not found')
                 res.redirect('/emp/log')
             }
 
 
 
-        }
-        else{
-            console.log(' data not found')
-            res.redirect('/emp/log')
-        }
-
-        
-          
-    })
-    .catch(err=>{
-        console.log("an error in login",err)
-    })
+        })
+        .catch(err => {
+            console.log("an error in login", err)
+        })
 
 }
 
 
-exports.logout= (req,res)=>{
+exports.logout = (req, res) => {
     res.clearCookie("empToken")
     res.redirect('/')
 }

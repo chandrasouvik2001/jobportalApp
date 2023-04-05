@@ -45,10 +45,17 @@ route.get("/category", admincontroller.category)
 route.post("/category_create", upload.single('image'), admincontroller.category_create)
 route.get("/deactive_category/:id", admincontroller.deactive_category)
 route.get("/active_category/:id", admincontroller.active_category)
+<<<<<<< HEAD
 route.get("/deactive_user/:id", admincontroller.deactive_user)
 route.get("/active_user/:id", admincontroller.active_user)
 route.get("/jobpost", admincontroller.jobpost)
 route.get("/contact", admincontroller.contact)
 
+=======
+route.get("/job_post", admincontroller.job_post_category)
+route.get("/job_post_view", admincontroller.job_post_details)
+route.get("/deactive_job_post/:id", admincontroller.deactive_jobPost)
+route.get("/active_job_post/:id", admincontroller.active_jobPost)
+>>>>>>> dbc56882de0c9efe019a8a50964a3e9b5b850dd2
 
 module.exports = route

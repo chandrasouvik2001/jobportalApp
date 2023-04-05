@@ -9,8 +9,9 @@ const Category = require("../model/categoryModel")
 const contact = require("../model/contactmodel")
 
 exports.home = (req, res) => {
-    Category.find()
-            .then(categoryDetails=>{
+    Category.find({
+        status: true
+    }).then(categoryDetails=>{
                 res.render("home", {
                     title: "home page",
                     data: req.user,
@@ -57,10 +58,16 @@ exports.contact_create = (req,res)=>{
 
 
 exports.joblist = (req, res) => {
-    res.render("job", {
-        title: "job page"
+    Category.find({
+        status: true
+    }).then(categoryDetails=>{
+        res.render("job", {
+            title: "job page",
+            categoryData: categoryDetails
+        })
     })
 }
+
 exports.jobdetails = (req, res) => {
     res.render("jobdetails", {
         title: "jobdetails page"
@@ -113,8 +120,13 @@ exports.register_create = (req, res) => {
                     secure: false,
                     requireTLS: true,
                     auth: {
+<<<<<<< HEAD
                         user: "tiwarysubho3@gmail.com ",
                         pass: "oesfmxdjuqstiexp"
+=======
+                        user: "sahananaser94@gmail.com",
+                        pass: "gtavpzuvfvfnkzzc"
+>>>>>>> dbc56882de0c9efe019a8a50964a3e9b5b850dd2
                     }
                 })
 

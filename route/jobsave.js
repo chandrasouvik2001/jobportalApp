@@ -33,7 +33,7 @@ const upload = multer({
 
 route.post('/save',upload.single('image'),jobcontroller.register)
 
-
+route.get('/lookupForJobPost', jobcontroller.lookupForJobPost)
 
 
 

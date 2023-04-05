@@ -24,14 +24,14 @@
                 <div class="vertical-space-60"></div>
                 <div class="job-post-box">
                     <form method="post" action="/jobpost/save" enctype="multipart/form-data">
-                        <div class="col-lg-12 col-md-12">
+                        <div class="">
                             <div class="form-group">
                                 <label for="sel1">Job Category</label>
                                 <select class="form-control" id="sel1" name="category">
-                                    <option>Freelance</option>
-                                    <option>Webdesign</option>
-                                    <option>Fullstack</option>
-                                    <option>Coding</option>
+                                    <option >Category</option>
+                                    <% for(let result of categoryData) {%>
+                                        <option value="<%=result._id%>"><%=result.name%></option>
+                                    <%}%>
                                 </select>
                             </div>
                         </div>
@@ -40,14 +40,12 @@
                             <input type="text" class="form-control" id="exampleInputJobtitle"
                                 placeholder="Enter your job title" name="title"required />
                         </div>
-                        <div class="row">
-                            <div class="col-lg-6 col-md-6">
-                                <div class="form-group">
-                                    <label for="exampleInputCompany">Company</label>
-                                    <input type="text" class="form-control" id="exampleInputCompany"
-                                        placeholder="Full name of company" name="cmp" required />
-                                </div>
-                            </div>
+                        <div class="form-group">
+                            <label for="exampleInputCompany">Company</label>
+                            <input type="text" class="form-control" id="exampleInputCompany"
+                                placeholder="Full name of company" name="cmp" required />
+                        </div>
+                            <!-- </div> -->
                             <!---<div class="col-lg-6 col-md-6">
                                 <div class="form-group">
                                     <label for="exampleInputLoction">Location</label>
@@ -55,7 +53,7 @@
                                         placeholder="Company Address" required />
                                 </div>
                             </div>---->
-                        </div>
+                        <!-- </div> -->
                         <div class="row">
                             <div class="col-lg-6 col-md-6">
                                 <div class="form-group ">
@@ -70,8 +68,8 @@
                                             <span>Drop your file here, or <i class="font-color-orange">Browse</i></span>
                                         </label>
                                     </div>----->
-                                    <input type="file" id="form3Example4cdg" class="form-control form-control-lg"
-                    name="image" />
+                                <input type="file" id="form3Example4cdg" class="form-control form-control-lg"
+                                    name="image" />
                                 </div>
                             </div>
                             <!-------<div class="col-lg-6 col-md-6">

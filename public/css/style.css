@@ -313,7 +313,7 @@ a {
 }
 
 a:hover {
-    color: #f26522;
+    color: #1248bb;
     text-decoration: none;
     transition: all .5s ease 0s
 }
@@ -1109,7 +1109,7 @@ button:focus {
 #intro .play {
     width: 60px;
     height: 60px;
-    color: #f26522;
+    color: #0a8196;
     background-color: #fff;
     border-radius: 50%;
     line-height: 60px
@@ -1191,7 +1191,7 @@ button.close {
 }
 
 #search-box .search-box_search_input {
-    width: 33.33333333%;
+    width: 70%;
     border: none;
     outline: none;
     height: 25px;
@@ -4775,6 +4775,11 @@ html .ui-button.ui-state-disabled:active {
 }
 
 
+.row_image {
+   display: flex;
+}
 
-
-
+.column_image {
+   flex: 33.33%;
+   margin:10px;
+}
